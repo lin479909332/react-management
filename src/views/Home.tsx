@@ -47,22 +47,30 @@ const View: React.FC = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
+      {/* 做侧边栏 */}
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
+      {/* 右侧内容 */}
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
+        {/* 右侧头部 */}
+        <Header style={{ paddingLeft: '16px', background: colorBgContainer }}>
+          <Breadcrumb style={{ lineHeight: '64px' }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
-          <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
+        </Header>
+        {/* 右侧内容 */}
+        <Content style={{ margin: '16px 16px 0', height: '100%' }}>
+          <div style={{ padding: 24, minHeight: 830, background: colorBgContainer }}>
             Bill is a cat.
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+        {/* 右侧底部 */}
+        <Footer style={{ textAlign: 'center', padding: 0, lineHeight: '48px' }}>
+          Ant Design ©2023 Created by Ant UED
+        </Footer>
       </Layout>
     </Layout>
   )
