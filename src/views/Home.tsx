@@ -31,17 +31,19 @@ function getItem(
 const items: MenuItem[] = [
   getItem('栏目 1', '/page1', <PieChartOutlined />),
   getItem('栏目 2', '/page2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
+  getItem('User', 'page3', <UserOutlined />, [
     getItem('Tom', '3'),
     getItem('Bill', '4'),
     getItem('Alex', '5'),
   ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+  getItem('Team', 'page4', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
   getItem('Files', '9', <FileOutlined />),
 ]
 
 const View: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
+  // 左侧菜单展开项
+  const [openKeys, setOpenKeys] = useState<string[]>([])
   const navigateTo = useNavigate()
   const {
     token: { colorBgContainer },
@@ -52,6 +54,11 @@ const View: React.FC = () => {
     // 编程式导航路由跳转
     navigateTo(e.key)
   }
+  // 监听菜单展开
+  const handleOpenChange = (keys: string[]) => {
+    // 设置菜单展开项为最新的一项
+    setOpenKeys([keys[keys.length - 1]])
+  }
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -60,10 +67,12 @@ const View: React.FC = () => {
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={['/page1']}
           mode="inline"
           items={items}
           onClick={menuClick}
+          onOpenChange={handleOpenChange}
+          openKeys={openKeys}
         />
       </Sider>
       {/* 右侧内容 */}
