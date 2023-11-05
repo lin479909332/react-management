@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import {
   DesktopOutlined,
   FileOutlined,
@@ -92,6 +92,8 @@ const MainMenu: React.FC = () => {
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const navigateTo = useNavigate()
 
+  const currentRoute = useLocation()
+
   // 菜单点击
   const menuClick = (e: { key: string }) => {
     // 编程式导航路由跳转
@@ -105,7 +107,8 @@ const MainMenu: React.FC = () => {
   return (
     <Menu
       theme="dark"
-      defaultSelectedKeys={['/page1']}
+      // 当前样式所在的选中项 key
+      defaultSelectedKeys={[currentRoute.pathname]}
       mode="inline"
       items={items}
       onClick={menuClick}
