@@ -1,79 +1,21 @@
 import React, { useState } from 'react'
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons'
-import type { MenuProps } from 'antd'
-import { Breadcrumb, Layout, Menu, theme } from 'antd'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Breadcrumb, Layout, theme } from 'antd'
+import { Outlet } from 'react-router-dom'
+import MainMenu from '@/components/MainMenu'
 
 const { Header, Content, Footer, Sider } = Layout
 
-type MenuItem = Required<MenuProps>['items'][number]
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem
-}
-
-const items: MenuItem[] = [
-  getItem('栏目 1', '/page1', <PieChartOutlined />),
-  getItem('栏目 2', '/page2', <DesktopOutlined />),
-  getItem('User', 'page3', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'page4', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
-]
-
 const View: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
-  // 左侧菜单展开项
-  const [openKeys, setOpenKeys] = useState<string[]>([])
-  const navigateTo = useNavigate()
   const {
     token: { colorBgContainer },
   } = theme.useToken()
-
-  // 菜单点击
-  const menuClick = (e: { key: string }) => {
-    // 编程式导航路由跳转
-    navigateTo(e.key)
-  }
-  // 监听菜单展开
-  const handleOpenChange = (keys: string[]) => {
-    // 设置菜单展开项为最新的一项
-    setOpenKeys([keys[keys.length - 1]])
-  }
-
   return (
     <Layout style={{ minHeight: '100vh' }}>
       {/* 做侧边栏 */}
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={['/page1']}
-          mode="inline"
-          items={items}
-          onClick={menuClick}
-          onOpenChange={handleOpenChange}
-          openKeys={openKeys}
-        />
+        <MainMenu />
       </Sider>
       {/* 右侧内容 */}
       <Layout>
