@@ -88,11 +88,24 @@ const items: MenuItem[] = [
 ]
 
 const MainMenu: React.FC = () => {
-  // 左侧菜单展开项
-  const [openKeys, setOpenKeys] = useState<string[]>([])
-  const navigateTo = useNavigate()
-
   const currentRoute = useLocation()
+  let firstOpenKey: string = ''
+  const findKey = (obj: { key: string }) => {
+    return obj.key === currentRoute.pathname
+  }
+  for (let i = 0; i < items.length; i++) {
+    if (
+      items[i]!['children'] &&
+      items[i]!['children'].length > 0 &&
+      items[i]!['children'].find(findKey)
+    ) {
+      firstOpenKey = items[i]!.key as string
+      break
+    }
+  }
+  // 左侧菜单展开项
+  const [openKeys, setOpenKeys] = useState<string[]>([firstOpenKey])
+  const navigateTo = useNavigate()
 
   // 菜单点击
   const menuClick = (e: { key: string }) => {
