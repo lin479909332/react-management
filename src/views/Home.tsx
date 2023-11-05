@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Breadcrumb, Layout, Menu, theme } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -78,7 +78,7 @@ const View: React.FC = () => {
         {/* 右侧内容 */}
         <Content style={{ margin: '16px 16px 0', height: '100%' }}>
           <div style={{ padding: 24, minHeight: 830, background: colorBgContainer }}>
-            Bill is a cat.
+            <Outlet />
           </div>
         </Content>
         {/* 右侧底部 */}
