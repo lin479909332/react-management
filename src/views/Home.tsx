@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Breadcrumb, Layout, Menu, theme } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -28,8 +29,8 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
+  getItem('栏目 1', '/page1', <PieChartOutlined />),
+  getItem('栏目 2', '/page2', <DesktopOutlined />),
   getItem('User', 'sub1', <UserOutlined />, [
     getItem('Tom', '3'),
     getItem('Bill', '4'),
@@ -41,16 +42,29 @@ const items: MenuItem[] = [
 
 const View: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
+  const navigateTo = useNavigate()
   const {
     token: { colorBgContainer },
   } = theme.useToken()
+
+  // 菜单点击
+  const menuClick = (e: { key: string }) => {
+    // 编程式导航路由跳转
+    navigateTo(e.key)
+  }
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       {/* 做侧边栏 */}
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={['1']}
+          mode="inline"
+          items={items}
+          onClick={menuClick}
+        />
       </Sider>
       {/* 右侧内容 */}
       <Layout>
