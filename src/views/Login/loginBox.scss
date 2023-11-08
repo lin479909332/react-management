@@ -5,6 +5,10 @@
     background-color: rgba(255, 255, 255, 0);
     border-color: #1890ff;
     color: #fff;
+    height: 38px;
+  }
+  .ant-input-password .ant-input{
+    height: 28px;
   }
   ::placeholder {
     color: #999;
@@ -13,5 +17,15 @@
   .ant-input-password-icon.anticon,
   .ant-input-password-icon.anticon:hover {
     color: #fff;
+  }
+  .captchaBox{
+    display: flex;
+    .captchaImg{
+      margin-left: 20px;
+      cursor: pointer;
+    }
+  }
+  .loginBtn{
+    height: 38px;
   }
 }
