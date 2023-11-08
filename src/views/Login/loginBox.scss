@@ -6,6 +6,9 @@
     border-color: #1890ff;
     color: #fff;
   }
+  ::placeholder {
+    color: #fff;
+  }
   // 控制密码框右侧眼睛图标
   .ant-input-password-icon.anticon,
   .ant-input-password-icon.anticon:hover {
