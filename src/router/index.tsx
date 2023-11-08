@@ -3,7 +3,8 @@ import React, { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
 import Home from '../views/Home'
-
+// 登录页不需要懒加载
+import Login from '../views/Login'
 const Page1: React.LazyExoticComponent<React.ComponentType<any>> = lazy(
   () => import('../views/Page1'),
 )
@@ -40,6 +41,10 @@ const routes = [
         element: withLoadingComponenet(<Page301 />),
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
   {
     path: '*',
