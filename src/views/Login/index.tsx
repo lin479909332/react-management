@@ -26,7 +26,17 @@ const view = () => {
           <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
             <Input placeholder="用户名" />
             <Input.Password placeholder="密码" />
-            <Button type="primary" block>
+            <div className="captchaBox">
+              <Input placeholder="验证码" />
+              <div className="captchaImg">
+                <img
+                  height="38"
+                  src="https://img1.baidu.com/it/u=1070984255,945844267&fm=253&fmt=auto&app=138&f=PNG?w=491&h=236"
+                  alt=""
+                />
+              </div>
+            </div>
+            <Button type="primary" className="loginBtn" block>
               登录
             </Button>
           </Space>
