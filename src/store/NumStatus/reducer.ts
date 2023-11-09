@@ -1,8 +1,6 @@
-import handleNum from './NumStatus'
-const defaultState = {
-  ...handleNum.state,
-}
-let reducer = (state = defaultState, action: { type: string; val: number }) => {
+import handleNum from './index'
+
+let reducer = (state = { ...handleNum.state }, action: { type: string; val: number }) => {
   let newState = JSON.parse(JSON.stringify(state))
 
   switch (action.type) {
