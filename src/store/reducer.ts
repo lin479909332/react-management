@@ -10,7 +10,7 @@ let reducer = (state = defaultState, action: { type: string; val: number }) => {
       handleNum.actions[handleNum.add1](newState, action)
       break
     case handleNum.add2:
-      handleNum.actions[handleNum.add1](newState, action)
+      handleNum.actions[handleNum.add2](newState, action)
       break
     default:
       break
