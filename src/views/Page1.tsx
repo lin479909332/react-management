@@ -1,8 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux'
 const Page1 = () => {
-  const { num } = useSelector((state) => ({
-    num: state.num,
-  }))
+  interface AppState {
+    num: number
+  }
+  const { num } = useSelector((state: AppState) => state)
+  // const { num } = useSelector((state) => ({
+  //   num: state.num,
+  // }))
   const dispatch = useDispatch()
   const changeNum = () => {
     // dispatch({ type: 'add1' })
