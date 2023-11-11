@@ -1,3 +1,3 @@
 import request from './index'
 
-export const captchaAPI = () => request.get('/prod-api/captchaImage')
+export const captchaAPI = (): Promise<CaptchaAPIRes> => request.get('/prod-api/captchaImage')
