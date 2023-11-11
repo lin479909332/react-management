@@ -19,6 +19,8 @@ const view = () => {
   const [passwordVal, setPasswordVal] = useState('')
   // 验证码
   const [captchaVal, setCaptchaVal] = useState('')
+  // 验证码图片
+  const [captchaImgVal, setCaptchaImgVal] = useState('')
   // 用户名输入事件
   const usernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsernameVal(e.target.value)
@@ -41,7 +43,12 @@ const view = () => {
     //   console.log(res)
     // })
     let captchaAPIRes = await captchaAPI()
-    console.log(captchaAPIRes)
+    if (captchaAPIRes.code === 200) {
+      // 设置验证码
+      setCaptchaImgVal('data:image/gif;base64,' + captchaAPIRes.img)
+      // 保存uuid
+      localStorage.setItem('uuid', captchaAPIRes.uuid)
+    }
   }
   return (
     <div className={styles.loginPage}>
@@ -62,11 +69,7 @@ const view = () => {
             <div className="captchaBox">
               <Input placeholder="验证码" onChange={captchaChange} />
               <div className="captchaImg" onClick={getCaptchaImg}>
-                <img
-                  height="38"
-                  src="https://img1.baidu.com/it/u=1070984255,945844267&fm=253&fmt=auto&app=138&f=PNG?w=491&h=236"
-                  alt=""
-                />
+                <img height="38" src={captchaImgVal} alt="加载失败" />
               </div>
             </div>
             <Button type="primary" className="loginBtn" block onClick={gotoLogin}>
