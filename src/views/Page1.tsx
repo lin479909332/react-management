@@ -10,13 +10,11 @@ const Page1 = () => {
     }
   }
   // const { num } = useSelector((state: AppState) => state.NumStatusReducer)
-  const { num } = useSelector((state: AppState) => ({
+  const { num, sarr } = useSelector((state: AppState) => ({
     num: state.NumStatusReducer.num,
-  }))
-
-  const { sarr } = useSelector((state: AppState) => ({
     sarr: state.SarrStatusReducer.sarr,
   }))
+
   const dispatch = useDispatch()
   const changeNum = () => {
     // dispatch({ type: 'add1' })
