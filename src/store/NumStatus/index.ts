@@ -1,4 +1,4 @@
-export default {
+const store = {
   state: {
     num: 20,
   },
@@ -10,8 +10,15 @@ export default {
       newState.num += action.val
     },
   },
-  actionNames:{
-    add1:"add1",
-    add2:"add2"
-  }
+  actionNames: {},
 }
+
+let actionNames = {}
+// 自动生成actionNames
+for (let key in store.actions) {
+  actionNames[key] = key
+}
+
+store.actionNames = actionNames
+
+export default store
