@@ -36,10 +36,12 @@ const view = () => {
     console.log(usernameVal, passwordVal, captchaVal)
   }
   // 获取（刷新）验证
-  const getCaptchaImg = () => {
-    captchaAPI().then((res) => {
-      console.log(res)
-    })
+  const getCaptchaImg = async () => {
+    // captchaAPI().then((res) => {
+    //   console.log(res)
+    // })
+    let captchaAPIRes = await captchaAPI()
+    console.log(captchaAPIRes)
   }
   return (
     <div className={styles.loginPage}>
