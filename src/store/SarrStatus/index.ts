@@ -1,4 +1,4 @@
-export default {
+const store =  {
   state: {
     sarr: [10, 20, 30],
   },
@@ -7,5 +7,15 @@ export default {
       newState.sarr.push(action.val)
     },
   },
-  sarrPush: 'sarrPush',
+  actionNames:{}
 }
+
+let actionNames = {}
+// 自动生成actionNames
+for (let key in store.actions) {
+  actionNames[key] = key
+}
+
+store.actionNames = actionNames
+
+export default store
