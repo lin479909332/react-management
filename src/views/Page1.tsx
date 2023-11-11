@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
+import numStatus from '@/store/NumStatus'
 const Page1 = () => {
   interface AppState {
     NumStatusReducer: {
@@ -24,11 +25,7 @@ const Page1 = () => {
 
   const changeNum2 = () => {
     // redux-thunk异步调用
-    dispatch((dis: Function) => {
-      setTimeout(() => {
-        dis({ type: 'add2', val: 10 })
-      }, 1000)
-    })
+    dispatch(numStatus.asyncActions.asyncAdd1)
   }
 
   const changeSarr = () => {
