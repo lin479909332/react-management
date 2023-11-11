@@ -22,6 +22,15 @@ const Page1 = () => {
     dispatch({ type: 'add2', val: 10 })
   }
 
+  const changeNum2 = () => {
+    // redux-thunk异步调用
+    dispatch((dis: Function) => {
+      setTimeout(() => {
+        dis({ type: 'add2', val: 10 })
+      }, 1000)
+    })
+  }
+
   const changeSarr = () => {
     dispatch({ type: 'sarrPush', val: 100 })
   }
@@ -30,7 +39,8 @@ const Page1 = () => {
       <h1>我是Page1</h1>
       <p>{num}</p>
       <p>{sarr}</p>
-      <button onClick={changeNum}>按钮</button>
+      <button onClick={changeNum}>同步按钮</button>
+      <button onClick={changeNum2}>异步按钮</button>
       <button onClick={changeSarr}>数组按钮</button>
     </div>
   )
