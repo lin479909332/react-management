@@ -1,10 +1,12 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import { Input, Space, Button } from 'antd'
-import { captchaAPI } from '@/request/api'
+import { useNavigate } from 'react-router-dom'
+import { Input, Space, Button, message } from 'antd'
+import { captchaAPI, loginAPI } from '@/request/api'
 import styles from './login.module.scss'
 import initLoginBg from './init.ts'
 import './loginBox.scss'
 const view = () => {
+  const navigateTo = useNavigate()
   // 初始化背景
   useEffect(() => {
     initLoginBg()
@@ -34,8 +36,26 @@ const view = () => {
     setCaptchaVal(e.target.value)
   }
   // 点击登录按钮事件
-  const gotoLogin = () => {
-    console.log(usernameVal, passwordVal, captchaVal)
+  const gotoLogin = async () => {
+    if (!usernameVal.trim() || !passwordVal.trim() || !captchaVal.trim()) {
+      message.warning('请完整输入信息')
+      return
+    }
+    const params = {
+      username: usernameVal,
+      password: passwordVal,
+      code: captchaVal,
+      uuid: localStorage.getItem('uuid') as string,
+    }
+    const loginAPIRes = await loginAPI(params)
+    if (loginAPIRes.code === 200) {
+      message.success('登陆成功')
+      // 保存token
+      localStorage.setItem('react-management-token', loginAPIRes.token)
+      navigateTo('/page1')
+      // 移除uuid
+      localStorage.removeItem('uuid')
+    }
   }
   // 获取（刷新）验证
   const getCaptchaImg = async () => {
