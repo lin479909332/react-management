@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { Input, Space, Button } from 'antd'
+import { captchaAPI } from '@/request/api'
 import styles from './login.module.scss'
 import initLoginBg from './init.ts'
 import './loginBox.scss'
@@ -10,6 +11,7 @@ const view = () => {
     window.onresize = function () {
       initLoginBg()
     }
+    getCaptchaImg()
   }, [])
   // 用户名
   const [usernameVal, setUsernameVal] = useState('')
@@ -33,6 +35,12 @@ const view = () => {
   const gotoLogin = () => {
     console.log(usernameVal, passwordVal, captchaVal)
   }
+  // 获取（刷新）验证
+  const getCaptchaImg = () => {
+    captchaAPI().then((res) => {
+      console.log(res)
+    })
+  }
   return (
     <div className={styles.loginPage}>
       {/* 存放背景 */}
@@ -51,7 +59,7 @@ const view = () => {
             <Input.Password placeholder="密码" onChange={passwordChange} />
             <div className="captchaBox">
               <Input placeholder="验证码" onChange={captchaChange} />
-              <div className="captchaImg">
+              <div className="captchaImg" onClick={getCaptchaImg}>
                 <img
                   height="38"
                   src="https://img1.baidu.com/it/u=1070984255,945844267&fm=253&fmt=auto&app=138&f=PNG?w=491&h=236"
