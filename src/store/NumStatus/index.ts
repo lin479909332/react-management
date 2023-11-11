@@ -10,6 +10,8 @@ export default {
       newState.num += action.val
     },
   },
-  add1:"add1",
-  add2:"add2"
+  actionNames:{
+    add1:"add1",
+    add2:"add2"
+  }
 }
